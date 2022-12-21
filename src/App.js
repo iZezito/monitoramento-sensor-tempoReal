@@ -1,5 +1,4 @@
 import React, {useEffect,useState} from "react";
-import "chartjs-plugin-streaming";
 import "./styles.css";
 import firebase from "./FirebaseConnection";
 
@@ -7,7 +6,7 @@ import firebase from "./FirebaseConnection";
 
 
 function App() {
-
+  const [ligado,setLigado] = useState(false)
   const [direcao,setDirecao] = useState('')
   const [sensor, setSensor] = useState(0)
   const [porcentagens, setPorcentagens] = useState(0)
@@ -32,6 +31,10 @@ function App() {
 
   })
 
+  const setNome = async () => {
+    await firebase.database().ref("Nome").set(!ligado)
+    setLigado(!ligado)
+  }
 
 
   const get = async () => await firebase.database().ref("Sensor_solo").on('value',(snapshot)=>{
@@ -70,8 +73,9 @@ function App() {
   
   return (
     <div className="App">
-      <div>
+      <div id="main">
         <h1>Microcontrolador</h1>
+        <button onClick={setNome}>Ligar Bomba</button>
         <div className="container">
           <div className="card">
             <p>Último valor</p>
@@ -94,7 +98,9 @@ function App() {
             </div>
             
           </div>
+          
         </div>
+        
         
       </div>
     </div>

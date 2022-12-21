@@ -41,3 +41,11 @@ h2{
 /* .porcentagem{
   color:green;
 } */
+
+button{
+  padding: 10px 10px;
+  margin: 10px 10px;
+  color: #fff;
+  background-color: blue;
+  border-radius: 7px;
+}
